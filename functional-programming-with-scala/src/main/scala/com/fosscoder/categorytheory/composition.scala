@@ -3,7 +3,7 @@
 //    map + (key -> { value :: map.getOrElse(key, Nil) })
 //}
 //
-//val result = Map(1 -> List("Chetan", "ChetanKhatri"))
+//val result = Map(1 -> List("Foss", "Coder"))
 //  .addBinding(2, "ABC")
 //  .addBinding(2, "ZXS")
 //

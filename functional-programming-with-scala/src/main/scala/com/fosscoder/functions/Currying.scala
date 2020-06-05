@@ -1,50 +1,51 @@
 package com.fosscoder.functions
 
 object Currying {
-  case class Text(value : String)
+  case class Message(value : String)
 
-  case class Source(sourceName : String){
-    def sendText(t: Text) = println(s"Text is coming from $sourceName and its value is ${t.value}")
+  case class TelcoProvider(sourceName : String){
+    def sendTextMessage(m: Message) = println(s"Text is coming from $sourceName and its value is ${m.value}")
   }
 
-  //Normal function
-  def communicate(t: Text,s: Source) = s.sendText(t)
+  // Scala Function
+  def communicate(m: Message,t: TelcoProvider) = t.sendTextMessage(m)
 
-  //Scala currying way
-  def communicateFrom(t: Text) = (s: Source) => s.sendText(t)
+  // Currying Function
+  def communicateFrom(m: Message) = (s: TelcoProvider) => s.sendTextMessage(m)
 
-  //or
-  def communicateFrom1(t: Text)(s: Source) = s.sendText(t)
-  def dollarString(s: String) = if (s.trim.startsWith("$")) s.trim.drop(1) else s
+  def communicateFromDifferentWay(m: Message)(s: TelcoProvider) = s.sendTextMessage(m)
 
-  def dollarSymbol(inc: String): String = {
-       inc match {
-      case s if s.trim.startsWith("$") => s.trim.drop(1)
-      case _ => inc
+  def messageWithSpecialChar(msg: String) = if (msg.trim.startsWith("$")) msg.trim.drop(1) else msg
+
+  def messageWithSpecialCharPatternMatch(msg: String): String = {
+      msg match {
+      case x if x.trim.startsWith("$") => x.trim.drop(1)
+      case _ => msg
       }
   }
 
 
   def main(args: Array[String]) {
-    //Normal way 1
-    communicate(Text("hi"), Source("first source"))
 
-    //Normal way 2
-    Source("Second source").sendText(Text("Hello"))
+    // Calling Scala Function
+    communicate(Message("Hello!"), TelcoProvider("This is Vodafone!"))
 
-    //currying way 1
-    val communication = communicateFrom(Text("How are you"))
-    communication(Source("3rd source"))
-    communication(Source("4th source"))
-    //currying way 2
-    communicateFrom1(Text("??"))(Source("5th source"))
+    // Calling Scala Function
+    TelcoProvider("Idea").sendTextMessage(Message("Hello!!"))
+
+    // Calling Currying Function 1
+    val communication = communicateFrom(Message("How you doing!"))
+    communication(TelcoProvider("Airtel Bharati"))
+    communication(TelcoProvider("Jio Telco"))
+    // Calling Currying Function 2
+    communicateFromDifferentWay(Message("??"))(TelcoProvider("Safari Com Africa"))
 
 
 
-    //convert normal function to curried function
-    val curriedCommunicate = (communicate _).curried
+    // Transform normal Scala Function to Curried Function
+    val curriedCommunication = (communicate _).curried
 
-    val backToNormalFunction = Function.uncurried(curriedCommunicate)
+    val transformToNormal = Function.uncurried(curriedCommunication)
 
   }
 }

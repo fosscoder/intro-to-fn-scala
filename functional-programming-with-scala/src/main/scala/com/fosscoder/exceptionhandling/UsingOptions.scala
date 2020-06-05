@@ -4,8 +4,8 @@ import scala.util.{Success, Failure, Try}
 
 object UsingOptions {
   def convertToInt(str: String) : Option[Int] = {
-    val integerValue = Try(str.toInt)
-    integerValue match {
+    val intValue = Try(str.toInt)
+    intValue match {
       case Failure(exception) => {
         println(s"Cannot convert $str to integer returning default value 0")
         None
@@ -20,10 +20,18 @@ object UsingOptions {
 
 
   def main(args: Array[String]) {
-    val stringValue = "10"
-    convertToInt(stringValue).getOrElse(0)
+    val strValue = "20"
+    convertToInt(strValue).getOrElse(0)
 
-    val stringInvalidValue = "hello"
-    convertToInt(stringInvalidValue).getOrElse(0)
+    val invalidStringInput = "Hey!"
+    convertToInt(invalidStringInput).getOrElse(0)
+
+    val number: Option[Int] = Option(5)
+    number match {
+      case Some(x) => println("Integer")
+      case None => println("Non Integer")
+      case _ => None
+    }
+
   }
 }

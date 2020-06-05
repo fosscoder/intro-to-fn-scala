@@ -23,6 +23,7 @@ object HigherOrderFunctions {
     println(s"sum of square of 2 and square of 3 is $sumOfSquaresOfIntegers")
 
     val greetings = saySomething("Hello")
+
     val greetHarris = greetings("Harris")
     val greetChris = greetings("Chris")
 

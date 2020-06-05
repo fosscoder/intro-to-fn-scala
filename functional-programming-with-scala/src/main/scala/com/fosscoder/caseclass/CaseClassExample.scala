@@ -1,21 +1,18 @@
 package com.fosscoder.caseclass
 
-case class Employee(userName:String, password:String)
+case class Student(userName:String, password:String = "123")
 
 object CaseClassExample {
   def main(args: Array[String]) {
-    //declare
-    val employee = Employee("employee123","password123")
 
-    //access fields
-    val employeeUserName = employee.userName
+    val student = Student("student_123","mypassword@123")
 
-    println("employee user name is "+employeeUserName)
+    val studentUserName = student.userName
 
-    //create a copy
-    val newEmployee = employee.copy(userName = "employee124")
+    println(s"Student user name is $studentUserName")
 
-    //compare objects
-    assert(employee != newEmployee)
+    val newStudentAdmission = student.copy(userName = "student_123")
+
+    println(assert(student != newStudentAdmission))
   }
 }
