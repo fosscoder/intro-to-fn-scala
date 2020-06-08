@@ -47,5 +47,7 @@ object Currying {
 
     val transformToNormal = Function.uncurried(curriedCommunication)
 
+    println(transformToNormal)
+
   }
 }

@@ -19,7 +19,7 @@ object Example extends App {
   println(s"print - 1 - y: $y")
   println(s"print - 2 - y: $y")
 
-  // lazy, not memoized
+  // lazy, memoized
   lazy val z = {
     println("Computing z")
     math.random
